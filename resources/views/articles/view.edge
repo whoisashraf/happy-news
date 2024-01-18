@@ -1,0 +1,44 @@
+@layout('layouts/app')
+@set('title','News - View articles')
+
+@section('body')
+<h1 class="is-size-3  has-text-centered">Daily Dose Of Happy News</h1>
+<div class="ml-4 mt-4 columns is-mobile is-multiline is-centered">
+  @each(article in articles)
+  <div class="card m-2 column is-one-quarter">
+    <div class="card-image">
+      <figure class="image is-3by2">
+        <img src="{{`/images/${article.image}`}}" alt="article image">
+      </figure>
+    </div>
+    <div class="card-content">
+      <p class="title is-size-4">
+        <a class="is-link has-text-black" href="{{route('articles.show',[article.slug])}}">{{article.title}}</a>
+      </p>
+      <p class="subtitle is-size-5">
+        {{article.content}}
+      </p>
+    </div>
+    @if(auth.isLoggedIn)
+    <footer class="card-footer">
+      <p class="card-footer-item">
+        <a class="button is-white" href="{{route('articles.edit',[article.slug])}}">
+          Edit
+        </a>
+      </p>
+      <form action="{{route('articles.destroy',[article.slug])}}?_method=DELETE" method="post" class="card-footer-item">
+        {{ csrfField() }}
+        <p>
+          <button type="submit" class="button is-white">
+            Delete
+          </button>
+        </p>
+      </form>
+      
+    </footer>
+        @endif
+    
+  </div>
+  @endeach
+</div>
+@endsection

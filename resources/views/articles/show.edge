@@ -1,0 +1,22 @@
+@layout('layouts/app')
+@set('title','News - View articles')
+
+@section('body')
+<h1 class="is-size-3  has-text-centered">{{article.title}}</h1>
+<div class="ml-4 mt-4 columns is-mobile is-multiline is-centered">
+  <div class="m-2 column is-one-third">
+    <div class="">
+      <figure class="image is-3by2">
+        <img src="{{`/images/${article.image}`}}" alt="article image">
+      </figure>
+    </div>
+    <div class="">
+      <p class="subtitle is-size-5">
+        {{article.content}}
+      </p>
+    </div>
+
+  </div>
+
+</div>
+@endsection

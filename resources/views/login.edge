@@ -1,0 +1,44 @@
+@layout('layouts/app')
+@set('title','News - Login')
+
+@section('body')
+<div class="column is-three-fifths is-offset-one-fifth">
+    <h1 class="is-size-4 label">Login</h1>
+        <form action="{{route('users.login')}}" method="POST">
+            {{ csrfField() }}
+            <div class="is-flex is-flex-direction-column ">
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                      <input class="input" name="email" type="email" placeholder="john@gmail.com" required>
+                    </div>
+                </div>
+                @if(flashMessages.has('errors.email'))
+                    <p> {{ flashMessages.get('errors.email') }} </p>
+                @end
+
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                      <input class="input" name="password" type="password" required>
+                    </div>
+                </div>
+                @if(flashMessages.has('errors.password'))
+                    <p> {{ flashMessages.get('errors.password') }} </p>
+                @end
+                <div class="field is-grouped">
+                    <div class="control">
+                      <button type="submit" class="button is-light">Login</button>
+                    </div>
+                    
+                  </div>
+
+                  <p>Don't have an account?</p>
+                  <div class="control">
+                    <a type="submit" class="button is-light mt-2 is-link has-text-black" href="/register">Register</a>
+                  </div>
+            </div>
+        </form>
+
+</div>
+@endsection

@@ -1,0 +1,43 @@
+@layout('layouts/app')
+@set('title','News - Update article')
+
+@section('body')
+<div class="column is-three-fifths is-offset-one-fifth">
+    <h1 class="is-size-4 label">Update Article</h1>
+        <form action="{{route('articles.update',[article.slug])}}?_method=PATCH" method="POST" enctype="multipart/form-data">
+            {{ csrfField() }}
+            <div class="is-flex is-flex-direction-column ">
+                <div class="field">
+                    <label class="label">Title</label>
+                    <div class="control">
+                      <input class="input" name="title" type="text" placeholder="article title" value="{{article.title}}" required>
+                    </div>
+                </div>
+                @if(flashMessages.has('errors.title'))
+                    <p> {{ flashMessages.get('errors.title') }} </p>
+                @end
+
+                <input type="file" name="image" id="" class="my-2" required accept="image/*">
+                
+                <div class="field">
+                    <label class="label">Content</label>
+                    <div class="control">
+                      <textarea class="textarea" name="content" placeholder="article content" required>{{article.content}}</textarea>
+                    </div>
+                  </div>
+                @if(flashMessages.has('errors.content'))
+                    <p> {{ flashMessages.get('errors.content') }} </p>
+                @end
+                <div class="field is-grouped">
+                    <div class="control">
+                      <button type="submit" class="button is-light">Update</button>
+                    </div>
+                    <div class="control">
+                      <a href="/articles" class="button is-light">Cancel</a>
+                    </div>
+                  </div>
+            </div>
+        </form>
+
+</div>
+@endsection

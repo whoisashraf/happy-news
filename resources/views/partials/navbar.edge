@@ -1,0 +1,55 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item is-size-3" href="/">
+        Happy News
+      </a>
+  
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="{{route('articles.index')}}">
+          All
+        </a>
+  
+        <a class="navbar-item" href="{{route('articles.create')}}">
+          Create
+        </a>
+      </div>
+
+
+  
+      <div class="navbar-end">
+        @if(auth.isLoggedIn)
+        <div class="navbar-item">
+          <p class="is-size-4 has-text-black">
+            {{auth.user.email}}
+          </p>
+        </div>
+        @endif
+
+        <div class="navbar-item">
+          <div class="buttons">
+            @if(auth.isLoggedIn)
+            <form action="/logout" method="post">
+              {{ csrfField() }}
+              <button class="button is-light" type="submit">
+                Log out
+              </button>
+            </form>
+            
+            @else
+            <a class="button is-light" href="/login">
+              Log in
+            </a>
+            @endif        
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
